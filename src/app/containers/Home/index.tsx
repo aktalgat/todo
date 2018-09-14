@@ -8,8 +8,19 @@ export namespace Home {
 export class Home extends React.Component<Home.Props> {
   render() {
     return (
-      <div>
-        <div>Hello Home page</div>
+      <div className="container">
+        <div className="card">
+          <div className="card-body">
+              <div className="form-row">
+                <div className="form-check-inline">
+                  <input type="checkbox" className="form-check-input"/>
+                </div>
+                <div className="col">
+                  <input type="text" className="form-control"/>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }
