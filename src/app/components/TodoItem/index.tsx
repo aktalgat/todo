@@ -26,10 +26,10 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     }
   }
 
-
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
       this.props.onKeyEnterPressed({todo: this.state.todo});
+
       event.preventDefault();
     }
   };
@@ -48,7 +48,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
         <div className="col">
           <input type="text" className="form-control" defaultValue={todo}
                  onChange={this.handleTodoChange}
-                 onKeyPress={this.handleKeyPress}/>
+                 onKeyPress={this.handleKeyPress} autoFocus/>
         </div>
       </div>
     );
