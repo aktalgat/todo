@@ -2,10 +2,7 @@ import {RootState} from "app/reducers/state";
 import {handleActions} from "redux-actions";
 import {TodoActions} from "app/actions";
 
-const initialState: RootState.TodoState = [{
-  todo: '',
-  checked: false
-}];
+const initialState: RootState.TodoState = [];
 
 export const todosReducer = handleActions<RootState.TodoState, any>(
   {

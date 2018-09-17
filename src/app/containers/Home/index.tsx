@@ -16,6 +16,7 @@ export namespace Home {
 
 @connect(
   (state: RootState): Pick<Home.Props, 'todos'> => {
+    console.log(state.todos);
     return {
       todos: state.todos
     }
@@ -42,11 +43,13 @@ export class Home extends React.Component<Home.Props> {
   };
 
   render() {
+    const item: TodoModel = {todo: '', checked: false};
     return (
       <div className="container">
         <div className="card">
           <div className="card-body">
             {this.getTodos()}
+            <TodoItem item={item} onKeyEnterPressed={()=>{}}/>
           </div>
         </div>
       </div>
