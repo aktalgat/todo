@@ -1,0 +1,9 @@
+.todo-item-input {
+  padding: 3px;
+  height: 1.5rem;
+  border: none;
+}
+.todo-item-input:focus {
+  outline-width: 0;
+  box-shadow: none;
+}

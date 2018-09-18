@@ -1,55 +1,56 @@
 import * as React from 'react';
-import {TodoModel} from "app/models";
 
-export namespace TodoItem {
-  export interface Methods {
-    onKeyEnterPressed: any
+export namespace NewItem {
+  export interface Props {
+    onEnteredItem: any
   }
-
-  export interface Fields {
-    item: TodoModel
-  }
-
-  export interface Props extends Methods, Fields {}
 
   export interface State {
     todo: string;
   }
 }
 
-export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
-
-  constructor(props: TodoItem.Props) {
+export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
+  constructor(props: NewItem.Props) {
     super(props);
     this.state = {
-      todo: props.item.todo
+      todo: ''
     }
   }
 
+  addNewItem = (item: string) => {
+    console.log('new item: {}', item);
+    this.props.onEnteredItem({todo: item});
+    this.setState({todo: ''});
+  };
+
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
-      this.props.onKeyEnterPressed({todo: this.state.todo});
       event.preventDefault();
+      this.addNewItem(this.state.todo);
     }
   };
 
   handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({todo: e.target.value});
+    if (e.target.value.length > 0) {
+      this.addNewItem(e.target.value);
+    }
   };
 
   render() {
-    const {todo, checked} = this.props.item;
     return (
       <div className="form-row">
         <div className="form-check-inline">
-          <input type="checkbox" className="form-check-input" defaultChecked={checked}/>
+          <span className="new-item-plus">+</span>
         </div>
         <div className="col">
-          <input type="text" className="form-control todo-item-input" defaultValue={todo}
+          <input type="text" className="form-control new-item-input"
+                 value={this.state.todo}
                  onChange={this.handleTodoChange}
                  onKeyPress={this.handleKeyPress} autoFocus/>
         </div>
       </div>
-    );
+    )
   }
 }
