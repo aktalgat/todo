@@ -8,8 +8,6 @@ const initialState: RootState.TodoState = [];
 export const todosReducer = handleActions<RootState.TodoState, any>(
   {
     [TodoActions.Type.ADD_TODO]: (state, action) => {
-      console.log('state: {}', state);
-      console.log('action: {}', action);
       let todo: TodoModel = {
         id: state.length,
         todo: action.payload.todo,
@@ -18,9 +16,6 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       return [...state, todo];
     },
     [TodoActions.Type.EDIT_TODO]: (state, action) => {
-      console.log('edit state: {}', state);
-      console.log('edit action: {}', action);
-
       return state.map((item) => {
         if (item.id == action.payload.id) {
           return {...item, ...action.payload};

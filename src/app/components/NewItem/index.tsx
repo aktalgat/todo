@@ -21,7 +21,6 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   }
 
   addNewItem = (item: string) => {
-    console.log('new item: {}', item);
     this.props.onEnteredItem({todo: item});
     this.setState({todo: ''});
   };
@@ -47,7 +46,6 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   handleOnBlur = () => {
     this.setState({active: false});
   };
-
 
   render() {
     return (

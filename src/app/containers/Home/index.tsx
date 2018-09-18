@@ -33,7 +33,6 @@ export namespace Home {
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
     const {add, edit, check} = this.props;
-    console.log('todos: {}', this.props.todos);
 
     return this.props.todos
       .filter(item => item.checked == checked)
