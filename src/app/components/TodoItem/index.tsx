@@ -35,7 +35,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
-      this.props.onKeyEnterPressed({todo: this.state.item});
+      this.props.onKeyEnterPressed({todo: ''});
       event.preventDefault();
     }
   };
