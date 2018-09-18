@@ -14,7 +14,8 @@ export namespace TodoItem {
   export interface Props extends Methods, Fields {}
 
   export interface State {
-    item: TodoModel;
+    item: TodoModel,
+    active: boolean
   }
 }
 
@@ -23,7 +24,8 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   constructor(props: TodoItem.Props) {
     super(props);
     this.state = {
-      item: props.item
+      item: props.item,
+      active: false
     }
   }
 
@@ -46,16 +48,26 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.props.onChanged(changedItem);
   };
 
+  handleOnFocus = () => {
+    this.setState({active: true});
+  };
+
+  handleOnBlur = () => {
+    this.setState({active: false});
+  };
+
   render() {
     const {checked} = this.props.item;
     return (
-      <div className="form-row todo-item-row">
+      <div className={"form-row todo-item-row " + (this.state.active ? "todo-item-row-active" : "")}>
         <div className="form-check-inline todo-item-check">
           <input type="checkbox" className="form-check-input" defaultChecked={checked}/>
         </div>
         <div className="col">
           <input type="text" className="form-control todo-item-input"
                  value={this.state.item.todo}
+                 onFocus={this.handleOnFocus}
+                 onBlur={this.handleOnBlur}
                  onChange={this.handleTodoChange}
                  onKeyPress={this.handleKeyPress} autoFocus/>
         </div>
