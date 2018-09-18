@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import {NewItem, TodoItem} from "app/components";
-import {TodoModel} from "app/models";
+import {TodoModels} from "app/models";
 import {connect} from "react-redux";
 import {RootState} from "app/reducers";
 import {bindActionCreators, Dispatch} from "redux";
@@ -9,7 +9,7 @@ import {TodoActions} from "app/actions";
 
 export namespace Home {
   export interface Props extends RouteComponentProps<void> {
-    todos: TodoModel[],
+    todos: TodoModels,
     add: any,
     edit: any,
     check: any
@@ -33,20 +33,24 @@ export namespace Home {
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
     const {add, edit, check} = this.props;
+    const {focusItem} = this.props.todos;
 
-    return this.props.todos
+    return this.props.todos.todos
       .filter(item => item.checked == checked)
       .map((item, index) => {
-      return <TodoItem key={index} item={item} onKeyEnterPressed={add} onChanged={edit} onChecked={check}/>
+      return <TodoItem key={index} item={item} isFocused={focusItem != 'new'}
+                       onKeyEnterPressed={add} onChanged={edit}
+                       onChecked={check}/>
     });
   };
 
   render() {
+    const {focusItem} = this.props.todos;
     return (
       <div className="container">
         <div className="card">
           {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add}/>
+          <NewItem onEnteredItem={this.props.add} isFocused={focusItem == 'new'}/>
           <hr/>
           {this.getTodos(true)}
         </div>

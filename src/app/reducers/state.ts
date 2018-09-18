@@ -1,5 +1,5 @@
 import { RouterState } from 'react-router-redux';
-import {TodoModel} from "app/models";
+import { TodoModels} from "app/models";
 
 export interface RootState {
   router: RouterState;
@@ -10,5 +10,5 @@ export interface RootState {
 
 export namespace RootState {
   export type LocaleState = any;
-  export type TodoState = TodoModel[];
+  export type TodoState = TodoModels;
 }
