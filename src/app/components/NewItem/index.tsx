@@ -40,13 +40,14 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
 
   render() {
     return (
-      <div className="form-row">
-        <div className="form-check-inline">
+      <div className="form-row new-item-row">
+        <div className="form-check-inline new-item-check">
           <span className="new-item-plus">+</span>
         </div>
         <div className="col">
           <input type="text" className="form-control new-item-input"
                  value={this.state.todo}
+                 placeholder="List item"
                  onChange={this.handleTodoChange}
                  onKeyPress={this.handleKeyPress} autoFocus/>
         </div>

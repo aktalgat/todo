@@ -45,10 +45,10 @@ export class Home extends React.Component<Home.Props> {
     return (
       <div className="container">
         <div className="card">
-          <div className="card-body">
+
             {this.getTodos()}
             <NewItem onEnteredItem={this.props.add}/>
-          </div>
+
         </div>
       </div>
     );

@@ -40,8 +40,8 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   render() {
     const {todo, checked} = this.props.item;
     return (
-      <div className="form-row">
-        <div className="form-check-inline">
+      <div className="form-row todo-item-row">
+        <div className="form-check-inline todo-item-check">
           <input type="checkbox" className="form-check-input" defaultChecked={checked}/>
         </div>
         <div className="col">

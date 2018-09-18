@@ -2,8 +2,21 @@
   padding: 3px;
   height: 1.5rem;
   border: none;
+  color: #000000;
 }
 .todo-item-input:focus {
   outline-width: 0;
   box-shadow: none;
+  color: #000000;
+}
+
+.todo-item-row {
+  padding: 0.1rem 1rem;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  margin: 0;
+}
+
+.todo-item-check {
+  margin: 0;
 }
