@@ -21,7 +21,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   }
 
   addNewItem = (item: string) => {
-    this.props.onEnteredItem({todo: item});
+    this.props.onEnteredItem({todo: item, checked: false});
     this.setState({todo: ''});
   };
 
@@ -56,7 +56,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
         <div className="col">
           <input type="text" className="form-control new-item-input"
                  value={this.state.todo}
-                 placeholder="List item"
+                 placeholder="New item"
                  onFocus={this.handleOnFocus}
                  onBlur={this.handleOnBlur}
                  onChange={this.handleTodoChange}

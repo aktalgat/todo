@@ -11,7 +11,7 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       let todo: TodoModel = {
         id: state.length,
         todo: action.payload.todo,
-        checked: false
+        checked: action.payload.checked
       };
       return [...state, todo];
     },
