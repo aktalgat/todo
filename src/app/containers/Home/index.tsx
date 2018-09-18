@@ -10,34 +10,31 @@ import {TodoActions} from "app/actions";
 export namespace Home {
   export interface Props extends RouteComponentProps<void> {
     todos: TodoModel[],
-    add: any
+    add: any,
+    edit: any
   }
 }
 
 @connect(
   (state: RootState): Pick<Home.Props, 'todos'> => {
-    console.log(state.todos);
     return {
       todos: state.todos
     }
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'edit'> => {
     return {
-      add: bindActionCreators(TodoActions.add, dispatch)
+      add: bindActionCreators(TodoActions.add, dispatch),
+      edit: bindActionCreators(TodoActions.edit, dispatch)
     }
   }
 )
 export class Home extends React.Component<Home.Props> {
-  addTodo(item: TodoModel) {
-    console.log('item: {}', item);
-  }
-
   getTodos = () => {
-    const {add} = this.props;
+    const {add, edit} = this.props;
     console.log('todos: {}', this.props.todos);
 
     return this.props.todos.map((todo, index) => {
-      return <TodoItem key={index} item={todo} onKeyEnterPressed={add}/>
+      return <TodoItem key={index} item={todo} onKeyEnterPressed={add} onChanged={edit}/>
     });
   };
 
@@ -45,10 +42,8 @@ export class Home extends React.Component<Home.Props> {
     return (
       <div className="container">
         <div className="card">
-
-            {this.getTodos()}
-            <NewItem onEnteredItem={this.props.add}/>
-
+          {this.getTodos()}
+          <NewItem onEnteredItem={this.props.add}/>
         </div>
       </div>
     );

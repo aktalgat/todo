@@ -3,7 +3,8 @@ import {TodoModel} from "app/models";
 
 export namespace TodoItem {
   export interface Methods {
-    onKeyEnterPressed: any
+    onKeyEnterPressed: any,
+    onChanged: any
   }
 
   export interface Fields {
@@ -13,7 +14,7 @@ export namespace TodoItem {
   export interface Props extends Methods, Fields {}
 
   export interface State {
-    todo: string;
+    item: TodoModel;
   }
 }
 
@@ -22,30 +23,39 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   constructor(props: TodoItem.Props) {
     super(props);
     this.state = {
-      todo: props.item.todo
+      item: props.item
+    }
+  }
+
+  componentWillReceiveProps(nextProps: TodoItem.Props) {
+    if (nextProps.item.todo !== this.state.item.todo) {
+      this.setState({item: nextProps.item});
     }
   }
 
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
-      this.props.onKeyEnterPressed({todo: this.state.todo});
+      this.props.onKeyEnterPressed({todo: this.state.item});
       event.preventDefault();
     }
   };
 
   handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({todo: e.target.value});
+    let changedItem = {...this.state.item, todo: e.target.value};
+    this.setState({item: changedItem});
+    this.props.onChanged(changedItem);
   };
 
   render() {
-    const {todo, checked} = this.props.item;
+    const {checked} = this.props.item;
     return (
       <div className="form-row todo-item-row">
         <div className="form-check-inline todo-item-check">
           <input type="checkbox" className="form-check-input" defaultChecked={checked}/>
         </div>
         <div className="col">
-          <input type="text" className="form-control todo-item-input" defaultValue={todo}
+          <input type="text" className="form-control todo-item-input"
+                 value={this.state.item.todo}
                  onChange={this.handleTodoChange}
                  onKeyPress={this.handleKeyPress} autoFocus/>
         </div>
