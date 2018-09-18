@@ -4,10 +4,21 @@
   border: none;
   color: #000000;
 }
+
 .todo-item-input:focus {
   outline-width: 0;
   box-shadow: none;
   color: #000000;
+}
+
+.todo-item-input-checked {
+  color: #909090;
+  text-decoration: line-through;
+}
+
+.todo-item-input-checked:focus {
+  color: #909090;
+  text-decoration: line-through;
 }
 
 .todo-item-row {

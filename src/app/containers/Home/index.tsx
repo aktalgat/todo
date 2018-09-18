@@ -11,7 +11,8 @@ export namespace Home {
   export interface Props extends RouteComponentProps<void> {
     todos: TodoModel[],
     add: any,
-    edit: any
+    edit: any,
+    check: any
   }
 }
 
@@ -21,20 +22,23 @@ export namespace Home {
       todos: state.todos
     }
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'edit'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'edit' | 'check'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
-      edit: bindActionCreators(TodoActions.edit, dispatch)
+      edit: bindActionCreators(TodoActions.edit, dispatch),
+      check: bindActionCreators(TodoActions.check, dispatch)
     }
   }
 )
 export class Home extends React.Component<Home.Props> {
-  getTodos = () => {
-    const {add, edit} = this.props;
+  getTodos = (checked: boolean) => {
+    const {add, edit, check} = this.props;
     console.log('todos: {}', this.props.todos);
 
-    return this.props.todos.map((todo, index) => {
-      return <TodoItem key={index} item={todo} onKeyEnterPressed={add} onChanged={edit}/>
+    return this.props.todos
+      .filter(item => item.checked == checked)
+      .map((item, index) => {
+      return <TodoItem key={index} item={item} onKeyEnterPressed={add} onChanged={edit} onChecked={check}/>
     });
   };
 
@@ -42,8 +46,10 @@ export class Home extends React.Component<Home.Props> {
     return (
       <div className="container">
         <div className="card">
-          {this.getTodos()}
+          {this.getTodos(false)}
           <NewItem onEnteredItem={this.props.add}/>
+          <hr/>
+          {this.getTodos(true)}
         </div>
       </div>
     );

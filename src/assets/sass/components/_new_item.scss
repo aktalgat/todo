@@ -17,9 +17,14 @@
 
 .new-item-row {
   padding: 0.1rem 1rem;
+  margin: 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.new-item-row-active {
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #eeeeee;
-  margin: 0;
 }
 
 .new-item-check {

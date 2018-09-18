@@ -4,7 +4,8 @@ import {TodoModel} from "app/models";
 export namespace TodoItem {
   export interface Methods {
     onKeyEnterPressed: any,
-    onChanged: any
+    onChanged: any,
+    onChecked: any
   }
 
   export interface Fields {
@@ -48,6 +49,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.props.onChanged(changedItem);
   };
 
+  handleTodoChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let changedItem = {...this.state.item, checked: e.target.checked};
+    this.setState({item: changedItem});
+    this.props.onChecked(changedItem);
+  };
+
   handleOnFocus = () => {
     this.setState({active: true});
   };
@@ -57,19 +64,22 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   };
 
   render() {
-    const {checked} = this.props.item;
+    const {checked, todo} = this.props.item;
     return (
-      <div className={"form-row todo-item-row " + (this.state.active ? "todo-item-row-active" : "")}>
+      <div className={"form-row todo-item-row" + (this.state.active ? " todo-item-row-active" : "")}>
         <div className="form-check-inline todo-item-check">
-          <input type="checkbox" className="form-check-input" defaultChecked={checked}/>
+          <input type="checkbox" className="form-check-input"
+                 checked={checked}
+                 onChange={this.handleTodoChecked}/>
         </div>
         <div className="col">
-          <input type="text" className="form-control todo-item-input"
-                 value={this.state.item.todo}
+          <input type="text"
+                 className={"form-control todo-item-input" + (checked ? " todo-item-input-checked" : "")}
+                 value={todo}
                  onFocus={this.handleOnFocus}
                  onBlur={this.handleOnBlur}
                  onChange={this.handleTodoChange}
-                 onKeyPress={this.handleKeyPress} autoFocus/>
+                 onKeyPress={this.handleKeyPress} autoFocus={!checked}/>
         </div>
       </div>
     );

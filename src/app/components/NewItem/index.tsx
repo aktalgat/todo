@@ -7,6 +7,7 @@ export namespace NewItem {
 
   export interface State {
     todo: string;
+    active: boolean;
   }
 }
 
@@ -14,7 +15,8 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   constructor(props: NewItem.Props) {
     super(props);
     this.state = {
-      todo: ''
+      todo: '',
+      active: false
     }
   }
 
@@ -38,9 +40,18 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
     }
   };
 
+  handleOnFocus = () => {
+    this.setState({active: true});
+  };
+
+  handleOnBlur = () => {
+    this.setState({active: false});
+  };
+
+
   render() {
     return (
-      <div className="form-row new-item-row">
+      <div className={"form-row new-item-row" + (this.state.active ? " new-item-row-active" : "")}>
         <div className="form-check-inline new-item-check">
           <span className="new-item-plus">+</span>
         </div>
@@ -48,6 +59,8 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
           <input type="text" className="form-control new-item-input"
                  value={this.state.todo}
                  placeholder="List item"
+                 onFocus={this.handleOnFocus}
+                 onBlur={this.handleOnBlur}
                  onChange={this.handleTodoChange}
                  onKeyPress={this.handleKeyPress} autoFocus/>
         </div>

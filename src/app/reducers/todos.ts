@@ -23,7 +23,15 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
 
       return state.map((item) => {
         if (item.id == action.payload.id) {
-          return {...item, todo: action.payload.todo};
+          return {...item, ...action.payload};
+        }
+        return item
+      });
+    },
+    [TodoActions.Type.CHECK_TODO]: (state, action) => {
+      return state.map((item) => {
+        if (item.id == action.payload.id) {
+          return {...item, ...action.payload};
         }
         return item
       });
