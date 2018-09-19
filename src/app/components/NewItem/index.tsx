@@ -45,13 +45,6 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
     this.setState({ todo: '' });
   };
 
-  handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.charCode == 13) {
-      event.preventDefault();
-      this.addNewItem(this.state.todo);
-    }
-  };
-
   handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ todo: e.target.value });
     if (e.target.value.length > 0) {
@@ -83,7 +76,6 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
             onFocus={this.handleOnFocus}
             onBlur={this.handleOnBlur}
             onChange={this.handleTodoChange}
-            onKeyPress={this.handleKeyPress}
             autoFocus
           />
         </div>

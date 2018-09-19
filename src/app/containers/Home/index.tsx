@@ -51,6 +51,17 @@ export class Home extends React.Component<Home.Props> {
     });
   };
 
+  getCheckedCount = () => {
+    return this.props.model.todos.filter(item => item.checked).length;
+  };
+
+  getHr = () => {
+    if (this.getCheckedCount() > 0) {
+      return <hr />;
+    }
+    return '';
+  };
+
   render() {
     const { focusItem, title } = this.props.model;
     const { editTitle } = this.props;
@@ -60,7 +71,8 @@ export class Home extends React.Component<Home.Props> {
           <Title title={title} onEditTitle={editTitle}/>
           {this.getTodos(false)}
           <NewItem onEnteredItem={this.props.add} isFocused={focusItem == 'new'} />
-          <hr />
+          {}
+          {this.getHr()}
           {this.getTodos(true)}
         </div>
       </div>
