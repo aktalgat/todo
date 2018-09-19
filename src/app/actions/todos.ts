@@ -1,4 +1,4 @@
-import {createAction} from "redux-actions";
+import { createAction } from 'redux-actions';
 
 export namespace TodoActions {
   export enum Type {
