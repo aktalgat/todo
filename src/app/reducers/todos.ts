@@ -39,6 +39,10 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
         return item;
       });
       return { ...state, todos: todos };
+    },
+
+    [TodoActions.Type.EDIT_TITLE]: (state, action) => {
+      return {...state, title: action.payload.title};
     }
   },
   initialState

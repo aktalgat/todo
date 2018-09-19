@@ -11,8 +11,9 @@ export namespace Home {
   export interface Props extends RouteComponentProps<void> {
     model: TodoModels;
     add: any;
-    edit: any;
+    editTodo: any;
     check: any;
+    editTitle: any
   }
 }
 
@@ -22,17 +23,18 @@ export namespace Home {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'edit' | 'check'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
-      edit: bindActionCreators(TodoActions.edit, dispatch),
-      check: bindActionCreators(TodoActions.check, dispatch)
+      editTodo: bindActionCreators(TodoActions.editTodo, dispatch),
+      check: bindActionCreators(TodoActions.check, dispatch),
+      editTitle: bindActionCreators(TodoActions.editTitle, dispatch)
     };
   }
 )
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
-    const { add, edit, check } = this.props;
+    const { add, editTodo, check } = this.props;
     const { focusItem } = this.props.model;
 
     return this.props.model.todos.filter((item) => item.checked == checked).map((item, index) => {
@@ -42,7 +44,7 @@ export class Home extends React.Component<Home.Props> {
           item={item}
           isFocused={focusItem != 'new'}
           onKeyEnterPressed={add}
-          onChanged={edit}
+          onChanged={editTodo}
           onChecked={check}
         />
       );
@@ -51,10 +53,11 @@ export class Home extends React.Component<Home.Props> {
 
   render() {
     const { focusItem, title } = this.props.model;
+    const { editTitle } = this.props;
     return (
       <div className="container">
         <div className="card">
-          <Title title={title} />
+          <Title title={title} onEditTitle={editTitle}/>
           {this.getTodos(false)}
           <NewItem onEnteredItem={this.props.add} isFocused={focusItem == 'new'} />
           <hr />

@@ -1,9 +1,15 @@
 import * as React from 'react';
 
 export namespace Title {
-  export interface Props {
+  export interface Methods {
+    onEditTitle: any
+  }
+
+  export interface Fields {
     title: string;
   }
+
+  export interface Props extends Methods, Fields { }
 
   export interface State {
     title: string;
@@ -20,6 +26,7 @@ export class Title extends React.Component<Title.Props, Title.State> {
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ title: e.target.value });
+    this.props.onEditTitle({title: e.target.value});
   };
 
   render() {
