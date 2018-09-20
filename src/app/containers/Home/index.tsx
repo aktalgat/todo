@@ -19,6 +19,7 @@ export namespace Home {
 
 @connect(
   (state: RootState): Pick<Home.Props, 'model'> => {
+    console.log('model: {}', state.todos);
     return {
       model: state.todos
     };
@@ -71,7 +72,6 @@ export class Home extends React.Component<Home.Props> {
           <Title title={title} onEditTitle={editTitle}/>
           {this.getTodos(false)}
           <NewItem onEnteredItem={this.props.add} isFocused={focusItem == 'new'} />
-          {}
           {this.getHr()}
           {this.getTodos(true)}
         </div>

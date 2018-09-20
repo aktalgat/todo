@@ -17,7 +17,8 @@ export namespace TodoItem {
   export interface Props extends Methods, Fields {}
 
   export interface State {
-    item: TodoModel;
+    todo: string;
+    checked: boolean;
     active: boolean;
   }
 }
@@ -28,20 +29,21 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   constructor(props: TodoItem.Props) {
     super(props);
     this.state = {
-      item: props.item,
+      todo: props.item.todo,
+      checked: props.item.checked,
       active: false
     };
   }
 
   componentWillReceiveProps(nextProps: TodoItem.Props) {
-    if (nextProps.item.todo !== this.state.item.todo) {
-      this.setState({ item: nextProps.item });
+    if (nextProps.item.todo !== this.state.todo) {
+      this.setState({ todo: nextProps.item.todo, checked: nextProps.item.checked });
     }
   }
 
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
-      this.props.onKeyEnterPressed({ ...this.state.item, todo: '' });
+      this.props.onKeyEnterPressed({ ...this.props.item, todo: '' });
       const node = this.ref.current;
       if (node != null) {
         node.blur();
@@ -51,14 +53,14 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   };
 
   handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let changedItem = { ...this.state.item, todo: e.target.value };
-    this.setState({ item: changedItem });
+    let changedItem = { ...this.props.item, todo: e.target.value };
+    this.setState({ todo: changedItem.todo });
     this.props.onChanged(changedItem);
   };
 
   handleTodoChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let changedItem = { ...this.state.item, checked: e.target.checked };
-    this.setState({ item: changedItem });
+    let changedItem = { ...this.props.item, checked: e.target.checked };
+    this.setState({ todo: changedItem.todo });
     this.props.onChecked(changedItem);
   };
 

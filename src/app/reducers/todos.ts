@@ -15,12 +15,24 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       if (action.payload.id == state.todos.length - 1 && !action.payload.checked) {
         return { ...state, focusItem: 'new' };
       }
+
       let todo: TodoModel = {
         id: state.todos.length,
         todo: action.payload.todo,
         checked: action.payload.checked
       };
-      return { ...state, todos: [...state.todos, todo], focusItem: '' + todo.id };
+      let newTodos = [...state.todos];
+      if (action.payload.id != undefined) {
+        newTodos.splice(action.payload.id + 1, 0, todo);
+      } else {
+        newTodos.push(todo);
+      }
+      let temp = newTodos.map((item, index) => {
+        item.id = index;
+        return item;
+      });
+
+      return { ...state, todos: temp, focusItem: '' + todo.id };
     },
     [TodoActions.Type.EDIT_TODO]: (state, action) => {
       let todos = state.todos.map((item) => {
