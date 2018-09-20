@@ -4,6 +4,7 @@ import { createRef } from 'react';
 export namespace NewItem {
   export interface Methods {
     onEnteredItem: any;
+    onBlur: any;
   }
   export interface Fields {
     isFocused: boolean;
@@ -60,6 +61,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
 
   handleOnBlur = () => {
     this.setState({ active: false, isFocused: false });
+    this.props.onBlur({focusItem: ''});
   };
 
   render() {

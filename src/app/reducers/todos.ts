@@ -15,7 +15,6 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       if (action.payload.id == state.todos.length - 1 && !action.payload.checked) {
         return { ...state, focusItem: 'new' };
       }
-
       let todo: TodoModel = {
         id: state.todos.length,
         todo: action.payload.todo,
@@ -55,6 +54,10 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
 
     [TodoActions.Type.EDIT_TITLE]: (state, action) => {
       return {...state, title: action.payload.title};
+    },
+
+    [TodoActions.Type.BLUR_NEW_ITEM]: (state, action) => {
+      return {...state, ...action.payload};
     }
   },
   initialState

@@ -13,7 +13,8 @@ export namespace Home {
     add: any;
     editTodo: any;
     check: any;
-    editTitle: any
+    editTitle: any;
+    onBlurNewItem: any;
   }
 }
 
@@ -24,12 +25,13 @@ export namespace Home {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'onBlurNewItem'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
       editTodo: bindActionCreators(TodoActions.editTodo, dispatch),
       check: bindActionCreators(TodoActions.check, dispatch),
-      editTitle: bindActionCreators(TodoActions.editTitle, dispatch)
+      editTitle: bindActionCreators(TodoActions.editTitle, dispatch),
+      onBlurNewItem: bindActionCreators(TodoActions.blurNewItem, dispatch)
     };
   }
 )
@@ -65,13 +67,14 @@ export class Home extends React.Component<Home.Props> {
 
   render() {
     const { focusItem, title } = this.props.model;
-    const { editTitle } = this.props;
+    const { editTitle, onBlurNewItem } = this.props;
     return (
       <div className="container">
         <div className="card">
           <Title title={title} onEditTitle={editTitle}/>
           {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add} isFocused={focusItem == 'new'} />
+          <NewItem onEnteredItem={this.props.add} onBlur={onBlurNewItem}
+                   isFocused={focusItem == 'new'} />
           {this.getHr()}
           {this.getTodos(true)}
         </div>
