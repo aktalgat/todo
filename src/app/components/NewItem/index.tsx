@@ -57,7 +57,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   };
 
   handleOnBlur = () => {
-    this.setState({ active: false });
+    this.setState({ active: false, isFocused: false });
   };
 
   render() {
