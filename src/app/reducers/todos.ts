@@ -12,7 +12,7 @@ const initialState: RootState.TodoState = {
 export const todosReducer = handleActions<RootState.TodoState, any>(
   {
     [TodoActions.Type.ADD_TODO]: (state, action) => {
-      if (action.payload.id == state.todos.length - 1) {
+      if (action.payload.id == state.todos.length - 1 && !action.payload.checked) {
         return { ...state, focusItem: 'new' };
       }
       let todo: TodoModel = {

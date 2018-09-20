@@ -37,7 +37,9 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   }
 
   componentWillReceiveProps(nextProps: NewItem.Props) {
-    this.setState({ isFocused: nextProps.isFocused });
+    if (this.state.isFocused != nextProps.isFocused) {
+      this.setState({isFocused: nextProps.isFocused});
+    }
   }
 
   addNewItem = (item: string) => {
