@@ -14,40 +14,32 @@ export namespace Home {
     editTodo: any;
     check: any;
     editTitle: any;
-    onLostFocus: any;
   }
 }
 
 @connect(
   (state: RootState): Pick<Home.Props, 'model'> => {
-    console.log('model: {}', state.todos);
     return {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'onLostFocus'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
       editTodo: bindActionCreators(TodoActions.editTodo, dispatch),
       check: bindActionCreators(TodoActions.check, dispatch),
-      editTitle: bindActionCreators(TodoActions.editTitle, dispatch),
-      onLostFocus: bindActionCreators(TodoActions.blurNewItem, dispatch)
+      editTitle: bindActionCreators(TodoActions.editTitle, dispatch)
     };
   }
 )
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
-    const { add, editTodo, check, onLostFocus } = this.props;
-    const { focusItem } = this.props.model;
-
+    const { add, editTodo, check } = this.props;
     return this.props.model.todos.filter((item) => item.checked == checked).map((item, index) => {
       return (
         <TodoItem
           key={index}
           item={item}
-          focusItem={focusItem}
-          isFocused={focusItem == index}
-          onLostFocus={onLostFocus}
           onKeyEnterPressed={add}
           onChanged={editTodo}
           onChecked={check}
@@ -57,7 +49,7 @@ export class Home extends React.Component<Home.Props> {
   };
 
   getCheckedCount = () => {
-    return this.props.model.todos.filter(item => item.checked).length;
+    return this.props.model.todos.filter((item) => item.checked).length;
   };
 
   getHr = () => {
@@ -68,15 +60,14 @@ export class Home extends React.Component<Home.Props> {
   };
 
   render() {
-    const { focusItem, title } = this.props.model;
-    const { editTitle, onLostFocus } = this.props;
+    const { title } = this.props.model;
+    const { editTitle } = this.props;
     return (
       <div className="container">
         <div className="card">
-          <Title title={title} onEditTitle={editTitle}/>
+          <Title title={title} onEditTitle={editTitle} />
           {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add} onLostFocus={onLostFocus}
-                   isFocused={focusItem == -1} focusItem={focusItem}/>
+          <NewItem onEnteredItem={this.props.add} />
           {this.getHr()}
           {this.getTodos(true)}
         </div>

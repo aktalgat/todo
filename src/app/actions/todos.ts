@@ -7,9 +7,7 @@ export namespace TodoActions {
     CHECK_TODO = 'CHECK_TODO',
     DELETE_TODO = 'DELETE_TODO',
 
-    EDIT_TITLE = 'EDIT_TITLE',
-
-    'BLUR_NEW_ITEM' = 'BLUR_NEW_ITEM'
+    EDIT_TITLE = 'EDIT_TITLE'
   }
 
   export const add = createAction(Type.ADD_TODO, (todo: any) => todo);
@@ -17,6 +15,4 @@ export namespace TodoActions {
   export const check = createAction(Type.CHECK_TODO, (todo: any) => todo);
 
   export const editTitle = createAction(Type.EDIT_TITLE, (title: any) => title);
-
-  export const blurNewItem = createAction(Type.BLUR_NEW_ITEM, (title: any) => title);
 }
