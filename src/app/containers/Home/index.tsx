@@ -24,7 +24,9 @@ export namespace Home {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'deleteTodo'> => {
+  (
+    dispatch: Dispatch
+  ): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'deleteTodo'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
       editTodo: bindActionCreators(TodoActions.editTodo, dispatch),

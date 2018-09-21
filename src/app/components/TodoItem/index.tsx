@@ -52,7 +52,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   };
 
   handleTodoDelete = () => {
-    this.props.onDelete({id: this.props.item.id});
+    this.props.onDelete({ id: this.props.item.id });
   };
 
   handleOnFocus = () => {
@@ -89,7 +89,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
         </div>
         <div className="col-auto">
           <span className="todo-item-delete" onClick={this.handleTodoDelete}>
-            <i className="fas fa-times-circle"/>
+            <i className="fas fa-times-circle" />
           </span>
         </div>
       </div>

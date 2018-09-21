@@ -37,11 +37,13 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       return { ...state, todos: todos };
     },
     [TodoActions.Type.DELETE_TODO]: (state, action) => {
-      let newTodos = state.todos.filter(item => item.id != action.payload.id).map((item, index) => {
-        item.id = index;
-        return item;
-      });
-      return {...state, todos: newTodos};
+      let newTodos = state.todos
+        .filter((item) => item.id != action.payload.id)
+        .map((item, index) => {
+          item.id = index;
+          return item;
+        });
+      return { ...state, todos: newTodos };
     },
 
     [TodoActions.Type.EDIT_TITLE]: (state, action) => {
