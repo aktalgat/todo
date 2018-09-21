@@ -1,7 +1,7 @@
-#Todo React App with Redux and TypeScript
+# Todo React App with Redux and TypeScript
 Todo React App with Redux, TypeScript, webpack 
 
-##Description
+## Description
 Minimum Todo React App to create tasks and check them as Google Keep.
 
 
