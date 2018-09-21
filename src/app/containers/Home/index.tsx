@@ -14,6 +14,7 @@ export namespace Home {
     editTodo: any;
     check: any;
     editTitle: any;
+    deleteTodo: any;
   }
 }
 
@@ -23,18 +24,19 @@ export namespace Home {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'deleteTodo'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
       editTodo: bindActionCreators(TodoActions.editTodo, dispatch),
       check: bindActionCreators(TodoActions.check, dispatch),
-      editTitle: bindActionCreators(TodoActions.editTitle, dispatch)
+      editTitle: bindActionCreators(TodoActions.editTitle, dispatch),
+      deleteTodo: bindActionCreators(TodoActions.deleteTodo, dispatch)
     };
   }
 )
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
-    const { add, editTodo, check } = this.props;
+    const { add, editTodo, check, deleteTodo } = this.props;
     return this.props.model.todos.filter((item) => item.checked == checked).map((item, index) => {
       return (
         <TodoItem
@@ -43,6 +45,7 @@ export class Home extends React.Component<Home.Props> {
           onKeyEnterPressed={add}
           onChanged={editTodo}
           onChecked={check}
+          onDelete={deleteTodo}
         />
       );
     });

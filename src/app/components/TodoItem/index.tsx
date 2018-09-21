@@ -6,6 +6,7 @@ export namespace TodoItem {
     onKeyEnterPressed: any;
     onChanged: any;
     onChecked: any;
+    onDelete: any;
   }
 
   export interface Fields {
@@ -50,6 +51,10 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.props.onChecked(changedItem);
   };
 
+  handleTodoDelete = () => {
+    this.props.onDelete({id: this.props.item.id});
+  };
+
   handleOnFocus = () => {
     this.setState({ active: true });
   };
@@ -81,6 +86,11 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onBlur={this.handleOnBlur}
             onChange={this.handleTodoChange}
           />
+        </div>
+        <div className="col-auto">
+          <span className="todo-item-delete" onClick={this.handleTodoDelete}>
+            <i className="fas fa-times-circle"/>
+          </span>
         </div>
       </div>
     );

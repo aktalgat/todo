@@ -13,6 +13,7 @@ export namespace TodoActions {
   export const add = createAction(Type.ADD_TODO, (todo: any) => todo);
   export const editTodo = createAction(Type.EDIT_TODO, (todo: any) => todo);
   export const check = createAction(Type.CHECK_TODO, (todo: any) => todo);
+  export const deleteTodo = createAction(Type.DELETE_TODO, (todo: any) => todo);
 
   export const editTitle = createAction(Type.EDIT_TITLE, (title: any) => title);
 }
