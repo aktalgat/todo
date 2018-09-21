@@ -14,7 +14,7 @@ export namespace Home {
     editTodo: any;
     check: any;
     editTitle: any;
-    onBlurNewItem: any;
+    onLostFocus: any;
   }
 }
 
@@ -25,19 +25,19 @@ export namespace Home {
       model: state.todos
     };
   },
-  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'onBlurNewItem'> => {
+  (dispatch: Dispatch): Pick<Home.Props, 'add' | 'editTodo' | 'check' | 'editTitle' | 'onLostFocus'> => {
     return {
       add: bindActionCreators(TodoActions.add, dispatch),
       editTodo: bindActionCreators(TodoActions.editTodo, dispatch),
       check: bindActionCreators(TodoActions.check, dispatch),
       editTitle: bindActionCreators(TodoActions.editTitle, dispatch),
-      onBlurNewItem: bindActionCreators(TodoActions.blurNewItem, dispatch)
+      onLostFocus: bindActionCreators(TodoActions.blurNewItem, dispatch)
     };
   }
 )
 export class Home extends React.Component<Home.Props> {
   getTodos = (checked: boolean) => {
-    const { add, editTodo, check } = this.props;
+    const { add, editTodo, check, onLostFocus } = this.props;
     const { focusItem } = this.props.model;
 
     return this.props.model.todos.filter((item) => item.checked == checked).map((item, index) => {
@@ -45,7 +45,9 @@ export class Home extends React.Component<Home.Props> {
         <TodoItem
           key={index}
           item={item}
-          isFocused={focusItem != 'new'}
+          focusItem={focusItem}
+          isFocused={focusItem == index}
+          onLostFocus={onLostFocus}
           onKeyEnterPressed={add}
           onChanged={editTodo}
           onChecked={check}
@@ -67,14 +69,14 @@ export class Home extends React.Component<Home.Props> {
 
   render() {
     const { focusItem, title } = this.props.model;
-    const { editTitle, onBlurNewItem } = this.props;
+    const { editTitle, onLostFocus } = this.props;
     return (
       <div className="container">
         <div className="card">
           <Title title={title} onEditTitle={editTitle}/>
           {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add} onBlur={onBlurNewItem}
-                   isFocused={focusItem == 'new'} />
+          <NewItem onEnteredItem={this.props.add} onLostFocus={onLostFocus}
+                   isFocused={focusItem == -1} focusItem={focusItem}/>
           {this.getHr()}
           {this.getTodos(true)}
         </div>

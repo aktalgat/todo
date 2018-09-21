@@ -5,16 +5,17 @@ import { TodoModel } from 'app/models';
 
 const initialState: RootState.TodoState = {
   todos: [],
-  focusItem: '',
+  focusItem: -1,
   title: ''
 };
 
 export const todosReducer = handleActions<RootState.TodoState, any>(
   {
     [TodoActions.Type.ADD_TODO]: (state, action) => {
-      if (action.payload.id == state.todos.length - 1 && !action.payload.checked) {
-        return { ...state, focusItem: 'new' };
+      if (action.payload.id == state.todos.length - 1) {
+        return { ...state, focusItem: -1 };
       }
+
       let todo: TodoModel = {
         id: state.todos.length,
         todo: action.payload.todo,
@@ -26,12 +27,18 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       } else {
         newTodos.push(todo);
       }
+      let newId = -1;
+      newTodos.forEach((item, index) => {
+        if (newId == -1 && item.id == todo.id) {
+          newId = index;
+        }
+      });
       let temp = newTodos.map((item, index) => {
         item.id = index;
         return item;
       });
 
-      return { ...state, todos: temp, focusItem: '' + todo.id };
+      return { ...state, todos: temp, focusItem: newId };
     },
     [TodoActions.Type.EDIT_TODO]: (state, action) => {
       let todos = state.todos.map((item) => {

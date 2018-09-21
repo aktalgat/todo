@@ -7,11 +7,13 @@ export namespace TodoItem {
     onKeyEnterPressed: any;
     onChanged: any;
     onChecked: any;
+    onLostFocus: any
   }
 
   export interface Fields {
     item: TodoModel;
     isFocused: boolean;
+    focusItem: number;
   }
 
   export interface Props extends Methods, Fields {}
@@ -20,6 +22,7 @@ export namespace TodoItem {
     todo: string;
     checked: boolean;
     active: boolean;
+    isFocused: boolean;
   }
 }
 
@@ -31,23 +34,35 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.state = {
       todo: props.item.todo,
       checked: props.item.checked,
-      active: false
+      active: false,
+      isFocused: props.isFocused
+
     };
+    this.setFocus();
   }
 
   componentWillReceiveProps(nextProps: TodoItem.Props) {
-    if (nextProps.item.todo !== this.state.todo) {
-      this.setState({ todo: nextProps.item.todo, checked: nextProps.item.checked });
-    }
+    this.setState({
+      todo: nextProps.item.todo,
+      checked: nextProps.item.checked,
+      isFocused: nextProps.focusItem == nextProps.item.id
+    });
   }
+
+  componentDidUpdate() {
+    this.setFocus();
+  }
+
+  setFocus = () => {
+    const node = this.ref.current;
+    if (node != null && this.state.isFocused) {
+      node.focus();
+    }
+  };
 
   handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.charCode == 13) {
       this.props.onKeyEnterPressed({ ...this.props.item, todo: '' });
-      const node = this.ref.current;
-      if (node != null) {
-        node.blur();
-      }
       event.preventDefault();
     }
   };
@@ -69,16 +84,15 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   };
 
   handleOnBlur = () => {
-    this.setState({ active: false });
+    this.setState({ active: false, isFocused: false });
+    this.props.onLostFocus({focusItem: -2});
   };
 
   render() {
     const { checked, todo } = this.props.item;
-    const { isFocused } = this.props;
+    const { isFocused } = this.state;
     return (
-      <div
-        className={'form-row todo-item-row' + (this.state.active ? ' todo-item-row-active' : '')}
-      >
+      <div className={'form-row todo-item-row' + (this.state.active ? ' todo-item-row-active' : '')}>
         <div className="form-check-inline todo-item-check">
           <input
             type="checkbox"

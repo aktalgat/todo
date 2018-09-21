@@ -4,10 +4,11 @@ import { createRef } from 'react';
 export namespace NewItem {
   export interface Methods {
     onEnteredItem: any;
-    onBlur: any;
+    onLostFocus: any;
   }
   export interface Fields {
     isFocused: boolean;
+    focusItem: number
   }
 
   export interface Props extends Methods, Fields {}
@@ -26,7 +27,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
     this.state = {
       todo: '',
       active: false,
-      isFocused: props.isFocused
+      isFocused: props.focusItem == -1
     };
   }
 
@@ -38,9 +39,8 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   }
 
   componentWillReceiveProps(nextProps: NewItem.Props) {
-    if (this.state.isFocused != nextProps.isFocused) {
-      this.setState({isFocused: nextProps.isFocused});
-    }
+    console.log('nex[ new: {}', nextProps);
+    this.setState({isFocused: nextProps.focusItem == -1});
   }
 
   addNewItem = (item: string) => {
@@ -61,10 +61,11 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
 
   handleOnBlur = () => {
     this.setState({ active: false, isFocused: false });
-    this.props.onBlur({focusItem: ''});
+    this.props.onLostFocus({focusItem: -2});
   };
 
   render() {
+    const { isFocused } = this.state;
     return (
       <div className={'form-row new-item-row' + (this.state.active ? ' new-item-row-active' : '')}>
         <div className="form-check-inline new-item-check">
@@ -80,7 +81,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
             onFocus={this.handleOnFocus}
             onBlur={this.handleOnBlur}
             onChange={this.handleTodoChange}
-            autoFocus
+            autoFocus={isFocused}
           />
         </div>
       </div>
