@@ -33,6 +33,24 @@
   border-bottom: 1px solid #eeeeee;
 }
 
+.todo-item-row-active .todo-item-delete {
+  display: block;
+}
+
+.todo-item-row:hover .todo-item-delete {
+  display: block;
+}
+
 .todo-item-check {
   margin: 0;
+}
+
+.todo-item-delete {
+  display: none;
+  color: #606060;
+  cursor: pointer;
+}
+
+.todo-item-delete:hover {
+  color: #000000;
 }

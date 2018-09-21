@@ -3,6 +3,10 @@
 @import "~bootstrap-scss";
 @import "~bootstrap-scss/utilities";
 
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
 @import "./components/not_found";
 @import "./components/new_item";
 @import "./components/todo_item";
