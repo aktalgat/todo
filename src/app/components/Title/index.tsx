@@ -7,6 +7,7 @@ export namespace Title {
 
   export interface Fields {
     title: string;
+    messages: any;
   }
 
   export interface Props extends Methods, Fields {}
@@ -30,13 +31,13 @@ export class Title extends React.Component<Title.Props, Title.State> {
   };
 
   render() {
-    const { title } = this.props;
+    const { title, messages } = this.props;
     return (
       <div className="form-row title-row">
         <input
           type="text"
           className="form-control title-input"
-          placeholder="Title"
+          placeholder={messages["title"]}
           onChange={this.handleChange}
           value={title}
         />

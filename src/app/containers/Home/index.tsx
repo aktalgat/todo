@@ -10,6 +10,7 @@ import { TodoActions } from 'app/actions';
 export namespace Home {
   export interface Props extends RouteComponentProps<void> {
     model: TodoModels;
+    messages: any;
     add: any;
     editTodo: any;
     check: any;
@@ -19,9 +20,10 @@ export namespace Home {
 }
 
 @connect(
-  (state: RootState): Pick<Home.Props, 'model'> => {
+  (state: RootState): Pick<Home.Props, 'model' | 'messages'> => {
     return {
-      model: state.todos
+      model: state.todos,
+      messages: state.intl.messages
     };
   },
   (
@@ -66,13 +68,13 @@ export class Home extends React.Component<Home.Props> {
 
   render() {
     const { title } = this.props.model;
-    const { editTitle } = this.props;
+    const { editTitle, messages } = this.props;
     return (
       <div className="container home-container">
         <div className="card">
-          <Title title={title} onEditTitle={editTitle} />
+          <Title title={title} onEditTitle={editTitle} messages={messages} />
           {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add} />
+          <NewItem onEnteredItem={this.props.add} messages={messages} />
           {this.getHr()}
           {this.getTodos(true)}
         </div>

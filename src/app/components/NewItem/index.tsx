@@ -3,6 +3,7 @@ import * as React from 'react';
 export namespace NewItem {
   export interface Props {
     onEnteredItem: any;
+    messages: any;
   }
 
   export interface State {
@@ -47,6 +48,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
   };
 
   render() {
+    const { messages } = this.props;
     return (
       <div className={'form-row new-item-row' + (this.state.active ? ' new-item-row-active' : '')}>
         <div className="form-check-inline new-item-check">
@@ -57,7 +59,7 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
             type="text"
             className="form-control new-item-input"
             value={this.state.todo}
-            placeholder="New item"
+            placeholder={messages["newItem"]}
             onFocus={this.handleOnFocus}
             onBlur={this.handleOnBlur}
             onChange={this.handleTodoChange}
