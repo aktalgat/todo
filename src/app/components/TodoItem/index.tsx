@@ -66,9 +66,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   render() {
     const { checked, todo } = this.props.item;
     return (
-      <div
-        className={'form-row todo-item-row' + (this.state.active ? ' todo-item-row-active' : '')}
-      >
+      <div className={'form-row todo-item-row' + (this.state.active ? ' todo-item-row-active' : '')}>
         <div className="form-check-inline todo-item-check">
           <input
             type="checkbox"
