@@ -1,5 +1,6 @@
 {
   "name": "English",
   "title": "Title",
-  "newItem": "New item"
+  "newItem": "New item",
+  "pageNotFound": "Page not found"
 }
