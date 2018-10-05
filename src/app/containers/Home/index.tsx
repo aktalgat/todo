@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { NewItem, Title, TodoItem } from 'app/components';
+import {Header, NewItem, Title, TodoItem} from 'app/components';
 import { TodoModels } from 'app/models';
 import { connect } from 'react-redux';
 import { RootState } from 'app/reducers';
@@ -70,13 +70,16 @@ export class Home extends React.Component<Home.Props> {
     const { title } = this.props.model;
     const { editTitle, messages } = this.props;
     return (
-      <div className="container home-container">
-        <div className="card">
-          <Title title={title} onEditTitle={editTitle} messages={messages} />
-          {this.getTodos(false)}
-          <NewItem onEnteredItem={this.props.add} messages={messages} />
-          {this.getHr()}
-          {this.getTodos(true)}
+      <div>
+        <Header/>
+        <div className="container home-container">
+          <div className="card">
+            <Title title={title} onEditTitle={editTitle} messages={messages} />
+            {this.getTodos(false)}
+            <NewItem onEnteredItem={this.props.add} messages={messages} />
+            {this.getHr()}
+            {this.getTodos(true)}
+          </div>
         </div>
       </div>
     );
