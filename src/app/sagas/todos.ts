@@ -39,6 +39,24 @@ export function* watchAddTodo() {
   yield takeEvery(TodoActions.Type.ADD_TODO, addTodo);
 }
 
+export function* checkTodo(data: any) {
+  yield put(TodoActions.checkRequest(data));
+  try {
+    const { response, error } = yield call(api.todos.check, data.payload);
+    if (response) {
+      yield put(TodoActions.checkDone(response));
+    } else {
+      yield put(TodoActions.checkFail(error));
+    }
+  } catch (e) {
+    yield put(TodoActions.checkFail(e));
+  }
+}
+
+export function* watchCheckTodo() {
+  yield takeEvery(TodoActions.Type.CHECK_TODO, checkTodo);
+}
+
 export function* startup() {
   yield fork(fetchTodos, {})
 }
@@ -48,4 +66,5 @@ export default function* root() {
 
   yield fork(watchFetchTodos);
   yield fork(watchAddTodo);
+  yield fork(watchCheckTodo);
 }
