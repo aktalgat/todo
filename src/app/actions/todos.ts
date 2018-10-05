@@ -27,7 +27,10 @@ export namespace TodoActions {
     REMOVE_TODO_DONE = 'REMOVE_TODO_DONE',
     REMOVE_TODO_FAIL = 'REMOVE_TODO_FAIL',
 
-    EDIT_TITLE = 'EDIT_TITLE'
+    EDIT_TITLE = 'EDIT_TITLE',
+    EDIT_TITLE_REQUEST = 'EDIT_TITLE_REQUEST',
+    EDIT_TITLE_DONE = 'EDIT_TITLE_DONE',
+    EDIT_TITLE_FAIL = 'EDIT_TITLE_FAIL'
   }
 
   export const getAll = createAction(Type.GET_ALL, (products: any) => products);
@@ -56,4 +59,7 @@ export namespace TodoActions {
   export const removeTodoFail = createAction(Type.REMOVE_TODO_FAIL, (todo: any) => todo);
 
   export const editTitle = createAction(Type.EDIT_TITLE, (title: any) => title);
+  export const editTitleRequest = createAction(Type.EDIT_TITLE_REQUEST, (title: any) => title);
+  export const editTitleDone = createAction(Type.EDIT_TITLE_DONE, (title: any) => title);
+  export const editTitleFail = createAction(Type.EDIT_TITLE_FAIL, (title: any) => title);
 }

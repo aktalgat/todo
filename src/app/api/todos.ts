@@ -71,3 +71,12 @@ export const editTodo = (todo: any) => {
     return { error: e.message };
   }
 };
+
+export const editTitle = (data: any) => {
+  try {
+    localStorage.setItem('title', data.title);
+    return { response: {title: data.title}};
+  } catch (e) {
+    return { error: e.message };
+  }
+};

@@ -93,6 +93,24 @@ export function* watchEditTodo() {
   yield takeEvery(TodoActions.Type.EDIT_TODO, editTodo);
 }
 
+export function* editTitle(data: any) {
+  yield put(TodoActions.editTitleRequest(data));
+  try {
+    const { response, error } = yield call(api.todos.editTitle, data.payload);
+    if (response) {
+      yield put(TodoActions.editTitleDone(response));
+    } else {
+      yield put(TodoActions.editTitleFail(error));
+    }
+  } catch (e) {
+    yield put(TodoActions.editTitleFail(e));
+  }
+}
+
+export function* watchEditTitle() {
+  yield takeEvery(TodoActions.Type.EDIT_TITLE, editTitle);
+}
+
 export function* startup() {
   yield fork(fetchTodos, {})
 }
@@ -105,4 +123,5 @@ export default function* root() {
   yield fork(watchCheckTodo);
   yield fork(watchRemoveTodo);
   yield fork(watchEditTodo);
+  yield fork(watchEditTitle);
 }
