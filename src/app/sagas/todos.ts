@@ -21,8 +21,18 @@ export function* watchFetchTodos() {
 }
 
 export function* addTodo(data: any) {
-  console.log("Data {}", data);
-  yield call(api.todos.set);
+  yield put(TodoActions.addRequest(data));
+  try {
+    const { response, error } = yield call(api.todos.set, data.payload);
+    if (response) {
+      yield put(TodoActions.addDone(response));
+    } else {
+      yield put(TodoActions.addFail(error));
+    }
+  } catch (e) {
+    yield put(TodoActions.addFail(e));
+  }
+
 }
 
 export function* watchAddTodo() {

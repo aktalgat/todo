@@ -11,6 +11,14 @@ export const get = () => {
   }
 };
 
-export const set = () => {
-  console.log("Called set from todos api");
+export const set = (todo: any) => {
+  try {
+    const todoJson = localStorage.getItem('todo') || '[]';
+    let todoArr = JSON.parse(todoJson);
+    todoArr.push(todo);
+    localStorage.setItem('todo', JSON.stringify(todoArr));
+    return {response: {todo, list: todoArr}};
+  } catch (e) {
+    return {error: e.message};
+  }
 };

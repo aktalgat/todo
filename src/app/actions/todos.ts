@@ -8,6 +8,9 @@ export namespace TodoActions {
     GET_ALL_FAIL = 'GET_ALL_FAIL',
 
     ADD_TODO = 'ADD_TODO',
+    ADD_TODO_REQUEST = 'ADD_TODO_REQUEST',
+    ADD_TODO_DONE = 'ADD_TODO_DONE',
+    ADD_TODO_FAIL = 'ADD_TODO_FAIL',
 
     EDIT_TODO = 'EDIT_TODO',
 
@@ -24,6 +27,10 @@ export namespace TodoActions {
   export const getAllFail = createAction(Type.GET_ALL_FAIL, (error: any) => error);
 
   export const add = createAction(Type.ADD_TODO, (todo: any) => todo);
+  export const addRequest = createAction(Type.ADD_TODO_REQUEST, (todo: any) => todo);
+  export const addDone = createAction(Type.ADD_TODO_DONE, (todo: any) => todo);
+  export const addFail = createAction(Type.ADD_TODO_FAIL, (todo: any) => todo);
+
   export const editTodo = createAction(Type.EDIT_TODO, (todo: any) => todo);
   export const check = createAction(Type.CHECK_TODO, (todo: any) => todo);
   export const deleteTodo = createAction(Type.DELETE_TODO, (todo: any) => todo);
