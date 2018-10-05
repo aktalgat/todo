@@ -15,6 +15,7 @@ export const set = (todo: any) => {
   try {
     const todoJson = localStorage.getItem('todo') || '[]';
     let todoArr = JSON.parse(todoJson);
+    todo.id = todoArr.length;
     todoArr.push(todo);
     localStorage.setItem('todo', JSON.stringify(todoArr));
     return {response: {todo, list: todoArr}};
