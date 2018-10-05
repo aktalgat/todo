@@ -44,9 +44,29 @@ export const check = (todo: any) => {
 export const remove = (todo: any) => {
   try {
     let todoArr = getTodoArr();
-    let newArr = todoArr.filter((item: any) => item.id != todo.id);
+    let newArr = todoArr.filter((item: any) => item.id != todo.id)
+      .map((item: any, index: number) => {
+        item.id = index;
+        return item;
+      });
     localStorage.setItem('todo', JSON.stringify(newArr));
     return { response: {todo, list: newArr }}
+  } catch (e) {
+    return { error: e.message };
+  }
+};
+
+export const editTodo = (todo: any) => {
+  try {
+    let todoArr = getTodoArr();
+    let newArr = todoArr.map((item: any) => {
+      if (item.id == todo.id) {
+        return {...todo};
+      }
+      return item;
+    });
+    localStorage.setItem('todo', JSON.stringify(newArr));
+    return { response: {todo, list: newArr }};
   } catch (e) {
     return { error: e.message };
   }
