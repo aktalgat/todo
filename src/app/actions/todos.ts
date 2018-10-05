@@ -19,7 +19,10 @@ export namespace TodoActions {
     CHECK_TODO_DONE = 'CHECK_TODO_DONE',
     CHECK_TODO_FAIL = 'CHECK_TODO_FAIL',
 
-    DELETE_TODO = 'DELETE_TODO',
+    REMOVE_TODO = 'REMOVE_TODO',
+    REMOVE_TODO_REQUEST = 'REMOVE_TODO_REQUEST',
+    REMOVE_TODO_DONE = 'REMOVE_TODO_DONE',
+    REMOVE_TODO_FAIL = 'REMOVE_TODO_FAIL',
 
     EDIT_TITLE = 'EDIT_TITLE'
   }
@@ -41,7 +44,10 @@ export namespace TodoActions {
   export const checkDone = createAction(Type.CHECK_TODO_DONE, (todo: any) => todo);
   export const checkFail = createAction(Type.CHECK_TODO_FAIL, (todo: any) => todo);
 
-  export const deleteTodo = createAction(Type.DELETE_TODO, (todo: any) => todo);
+  export const removeTodo = createAction(Type.REMOVE_TODO, (todo: any) => todo);
+  export const removeTodoRequest = createAction(Type.REMOVE_TODO_REQUEST, (todo: any) => todo);
+  export const removeTodoDone = createAction(Type.REMOVE_TODO_DONE, (todo: any) => todo);
+  export const removeTodoFail = createAction(Type.REMOVE_TODO_FAIL, (todo: any) => todo);
 
   export const editTitle = createAction(Type.EDIT_TITLE, (title: any) => title);
 }

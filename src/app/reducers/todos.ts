@@ -29,14 +29,8 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
     [TodoActions.Type.CHECK_TODO_DONE]: (state, action) => {
       return { ...state, todos: action.payload.list };
     },
-    [TodoActions.Type.DELETE_TODO]: (state, action) => {
-      let newTodos = state.todos
-        .filter((item) => item.id != action.payload.id)
-        .map((item, index) => {
-          item.id = index;
-          return item;
-        });
-      return { ...state, todos: newTodos };
+    [TodoActions.Type.REMOVE_TODO_DONE]: (state, action) => {
+      return { ...state, todos: action.payload.list};
     },
 
     [TodoActions.Type.EDIT_TITLE]: (state, action) => {

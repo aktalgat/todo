@@ -19,7 +19,7 @@ export const set = (todo: any) => {
     todo.id = todoArr.length;
     todoArr.push(todo);
     localStorage.setItem('todo', JSON.stringify(todoArr));
-    return {response: {todo, list: todoArr}};
+    return { response: {todo, list: todoArr}};
   } catch (e) {
     return {error: e.message};
   }
@@ -35,8 +35,19 @@ export const check = (todo: any) => {
       return item;
     });
     localStorage.setItem('todo', JSON.stringify(newArr));
-    return {response: {todo, list: newArr}};
+    return { response: {todo, list: newArr }};
   } catch (e) {
-    return {error: e.message};
+    return { error: e.message };
+  }
+};
+
+export const remove = (todo: any) => {
+  try {
+    let todoArr = getTodoArr();
+    let newArr = todoArr.filter((item: any) => item.id != todo.id);
+    localStorage.setItem('todo', JSON.stringify(newArr));
+    return { response: {todo, list: newArr }}
+  } catch (e) {
+    return { error: e.message };
   }
 };
