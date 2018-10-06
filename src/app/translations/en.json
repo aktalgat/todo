@@ -2,5 +2,7 @@
   "name": "English",
   "title": "Title",
   "newItem": "New item",
-  "pageNotFound": "Page not found"
+  "pageNotFound": "Page not found",
+  "ruLang": "РУС",
+  "enLang": "ENG"
 }

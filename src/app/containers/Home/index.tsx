@@ -71,7 +71,7 @@ export class Home extends React.Component<Home.Props> {
     const { editTitle, messages } = this.props;
     return (
       <div>
-        <Header/>
+        <Header messages={messages} />
         <div className="container home-container">
           <div className="card">
             <Title title={title} onEditTitle={editTitle} messages={messages} />

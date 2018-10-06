@@ -2,5 +2,7 @@
   "name": "Русский",
   "title": "Заголовок",
   "newItem": "Новый пункт",
-  "pageNotFound": "Страница не найдена"
+  "pageNotFound": "Страница не найдена",
+  "ruLang": "РУС",
+  "enLang": "ENG"
 }
