@@ -2,9 +2,16 @@ import * as React from 'react';
 import { FormattedMessage } from "react-intl";
 
 export namespace HeaderBar {
-  export interface Props {
-    messages: any
+  export interface Methods {
+    updateIntl: any
   }
+
+  export interface Fields {
+    currentLocale: any;
+    locales: any;
+  }
+
+  export interface Props extends Methods, Fields {}
 }
 
 export class HeaderBar extends React.Component<HeaderBar.Props> {
