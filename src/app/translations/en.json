@@ -3,6 +3,5 @@
   "title": "Title",
   "newItem": "New item",
   "pageNotFound": "Page not found",
-  "ruLang": "РУС",
-  "enLang": "ENG"
+  "lang": "ENG"
 }

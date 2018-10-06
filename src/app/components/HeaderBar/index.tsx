@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from "react-intl";
+import {Link} from "react-router-dom";
 
 export namespace HeaderBar {
   export interface Methods {
@@ -15,17 +15,26 @@ export namespace HeaderBar {
 }
 
 export class HeaderBar extends React.Component<HeaderBar.Props> {
+  handleLangClick = (locale: any) => {
+    this.props.updateIntl({
+      locale: locale,
+      messages: this.props.locales[locale]
+    })
+  };
+
   render() {
+    const { currentLocale, locales } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Todo</a>
+        <Link to="/" className="navbar-brand">Todo</Link>
         <div className="nav navbar-nav ml-auto">
-          <button className="btn btn-sm btn-primary">
-            <FormattedMessage id="ruLang" defaultMessage="РУС" />
-          </button>
-          <button className="btn btn-sm btn-outline-secondary">
-            <FormattedMessage id="enLang" defaultMessage="ENG" />
-          </button>
+          {Object.keys(locales).map(locale =>
+            <button key={locale}
+                    className={"btn btn-sm " + (currentLocale == locale ? 'btn-primary' : 'btn-outline-secondary')}
+                    onClick={() => this.handleLangClick(locale)}>
+              {locales[locale].lang}
+            </button>
+          )}
         </div>
       </nav>
     );

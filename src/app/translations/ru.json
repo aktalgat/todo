@@ -3,6 +3,5 @@
   "title": "Заголовок",
   "newItem": "Новый пункт",
   "pageNotFound": "Страница не найдена",
-  "ruLang": "РУС",
-  "enLang": "ENG"
+  "lang": "РУС"
 }
