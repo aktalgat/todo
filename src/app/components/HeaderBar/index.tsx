@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedMessage } from "react-intl";
 
-export namespace Header {
+export namespace HeaderBar {
   export interface Props {
     messages: any
   }
 }
 
-export class Header extends React.Component<Header.Props> {
+export class HeaderBar extends React.Component<HeaderBar.Props> {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

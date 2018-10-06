@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import {Header, NewItem, Title, TodoItem} from 'app/components';
+import {HeaderBar, NewItem, Title, TodoItem} from 'app/components';
 import { TodoModels } from 'app/models';
 import { connect } from 'react-redux';
 import { RootState } from 'app/reducers';
@@ -71,7 +71,7 @@ export class Home extends React.Component<Home.Props> {
     const { editTitle, messages } = this.props;
     return (
       <div>
-        <Header messages={messages} />
+        <HeaderBar messages={messages} />
         <div className="container home-container">
           <div className="card">
             <Title title={title} onEditTitle={editTitle} messages={messages} />
