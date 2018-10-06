@@ -5,7 +5,7 @@ Todo React App with Redux, TypeScript, webpack
 Minimum Todo React App to create tasks and check them as Google Keep.
 
 
-[Live demo](http://useful-todo.surge.sh/)
+[Live demo](http://todo-muscle.surge.sh/)
 
 ## Setup & Run
 
