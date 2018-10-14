@@ -11,10 +11,10 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
   {
     [TodoActions.Type.GET_ALL_DONE]: (state, action) => {
       const { list, title } = action.payload;
-      return { ...state, todos:  list, title: title };
+      return { ...state, todos: list, title: title };
     },
     [TodoActions.Type.ADD_TODO_DONE]: (state, action) => {
-      return { ...state, todos:  action.payload.list};
+      return { ...state, todos: action.payload.list };
     },
     [TodoActions.Type.EDIT_TODO_DONE]: (state, action) => {
       return { ...state, todos: action.payload.list };
@@ -23,7 +23,7 @@ export const todosReducer = handleActions<RootState.TodoState, any>(
       return { ...state, todos: action.payload.list };
     },
     [TodoActions.Type.REMOVE_TODO_DONE]: (state, action) => {
-      return { ...state, todos: action.payload.list};
+      return { ...state, todos: action.payload.list };
     },
 
     [TodoActions.Type.EDIT_TITLE]: (state, action) => {

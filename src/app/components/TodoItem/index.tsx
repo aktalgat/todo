@@ -72,8 +72,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             type="checkbox"
             className="form-check-input"
             checked={checked}
-            onChange={this.handleTodoChecked}
-          />
+            onChange={this.handleTodoChecked} />
         </div>
         <div className="col">
           <input
@@ -82,8 +81,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             value={todo}
             onFocus={this.handleOnFocus}
             onBlur={this.handleOnBlur}
-            onChange={this.handleTodoChange}
-          />
+            onChange={this.handleTodoChange} />
         </div>
         <div className="col-auto">
           <span className="todo-item-delete" onClick={this.handleTodoDelete}>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { NewItem, Title, TodoItem} from 'app/components';
+import { NewItem, Title, TodoItem } from 'app/components';
 import { TodoModels } from 'app/models';
 import { connect } from 'react-redux';
 import { RootState } from 'app/reducers';
@@ -49,8 +49,7 @@ export class Home extends React.Component<Home.Props> {
           onKeyEnterPressed={add}
           onChanged={editTodo}
           onChecked={check}
-          onDelete={removeTodo}
-        />
+          onDelete={removeTodo} />
       );
     });
   };

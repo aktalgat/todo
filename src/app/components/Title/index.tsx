@@ -37,10 +37,9 @@ export class Title extends React.Component<Title.Props, Title.State> {
         <input
           type="text"
           className="form-control title-input"
-          placeholder={messages["title"]}
+          placeholder={messages['title']}
           onChange={this.handleChange}
-          value={title}
-        />
+          value={title} />
       </div>
     );
   }

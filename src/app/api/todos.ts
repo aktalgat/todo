@@ -19,9 +19,9 @@ export const set = (todo: any) => {
     todo.id = todoArr.length;
     todoArr.push(todo);
     localStorage.setItem('todo', JSON.stringify(todoArr));
-    return { response: {todo, list: todoArr}};
+    return { response: { todo, list: todoArr } };
   } catch (e) {
-    return {error: e.message};
+    return { error: e.message };
   }
 };
 
@@ -30,12 +30,12 @@ export const check = (todo: any) => {
     let todoArr = getTodoArr();
     let newArr = todoArr.map((item: any) => {
       if (item.id == todo.id) {
-        return {...todo};
+        return { ...todo };
       }
       return item;
     });
     localStorage.setItem('todo', JSON.stringify(newArr));
-    return { response: {todo, list: newArr }};
+    return { response: { todo, list: newArr } };
   } catch (e) {
     return { error: e.message };
   }
@@ -44,13 +44,14 @@ export const check = (todo: any) => {
 export const remove = (todo: any) => {
   try {
     let todoArr = getTodoArr();
-    let newArr = todoArr.filter((item: any) => item.id != todo.id)
+    let newArr = todoArr
+      .filter((item: any) => item.id != todo.id)
       .map((item: any, index: number) => {
         item.id = index;
         return item;
       });
     localStorage.setItem('todo', JSON.stringify(newArr));
-    return { response: {todo, list: newArr }}
+    return { response: { todo, list: newArr } };
   } catch (e) {
     return { error: e.message };
   }
@@ -61,12 +62,12 @@ export const editTodo = (todo: any) => {
     let todoArr = getTodoArr();
     let newArr = todoArr.map((item: any) => {
       if (item.id == todo.id) {
-        return {...todo};
+        return { ...todo };
       }
       return item;
     });
     localStorage.setItem('todo', JSON.stringify(newArr));
-    return { response: {todo, list: newArr }};
+    return { response: { todo, list: newArr } };
   } catch (e) {
     return { error: e.message };
   }
@@ -75,7 +76,7 @@ export const editTodo = (todo: any) => {
 export const editTitle = (data: any) => {
   try {
     localStorage.setItem('title', data.title);
-    return { response: {title: data.title}};
+    return { response: { title: data.title } };
   } catch (e) {
     return { error: e.message };
   }

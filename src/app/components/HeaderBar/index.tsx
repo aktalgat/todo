@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export namespace HeaderBar {
   export interface Methods {
-    updateIntl: any
+    updateIntl: any;
   }
 
   export interface Fields {
@@ -19,22 +19,25 @@ export class HeaderBar extends React.Component<HeaderBar.Props> {
     this.props.updateIntl({
       locale: locale,
       messages: this.props.locales[locale]
-    })
+    });
   };
 
   render() {
     const { currentLocale, locales } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link to="/" className="navbar-brand">Todo</Link>
+        <Link to="/" className="navbar-brand">
+          Todo
+        </Link>
         <div className="nav navbar-nav ml-auto">
-          {Object.keys(locales).map(locale =>
-            <button key={locale}
-                    className={"btn btn-sm " + (currentLocale == locale ? 'btn-primary' : 'btn-outline-secondary')}
-                    onClick={() => this.handleLangClick(locale)}>
+          {Object.keys(locales).map((locale) => (
+            <button
+              key={locale}
+              className={'btn btn-sm ' + (currentLocale == locale ? 'btn-primary' : 'btn-outline-secondary')}
+              onClick={() => this.handleLangClick(locale)}>
               {locales[locale].lang}
             </button>
-          )}
+          ))}
         </div>
       </nav>
     );

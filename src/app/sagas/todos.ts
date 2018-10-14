@@ -1,5 +1,5 @@
-import {call, fork, put, takeEvery} from 'redux-saga/effects';
-import { TodoActions } from "app/actions";
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { TodoActions } from 'app/actions';
 import api from '../api';
 
 export function* fetchTodos(data: any) {
@@ -7,17 +7,17 @@ export function* fetchTodos(data: any) {
   try {
     const { response, error } = yield call(api.todos.get, data.payload);
     if (response) {
-      yield put(TodoActions.getAllDone(response))
+      yield put(TodoActions.getAllDone(response));
     } else {
-      yield put(TodoActions.getAllFail(error))
+      yield put(TodoActions.getAllFail(error));
     }
   } catch (e) {
-    yield put(TodoActions.getAllFail(e))
+    yield put(TodoActions.getAllFail(e));
   }
 }
 
 export function* watchFetchTodos() {
-  yield takeEvery(TodoActions.Type.GET_ALL, fetchTodos)
+  yield takeEvery(TodoActions.Type.GET_ALL, fetchTodos);
 }
 
 export function* addTodo(data: any) {
@@ -32,7 +32,6 @@ export function* addTodo(data: any) {
   } catch (e) {
     yield put(TodoActions.addFail(e));
   }
-
 }
 
 export function* watchAddTodo() {
@@ -112,7 +111,7 @@ export function* watchEditTitle() {
 }
 
 export function* startup() {
-  yield fork(fetchTodos, {})
+  yield fork(fetchTodos, {});
 }
 
 export default function* root() {

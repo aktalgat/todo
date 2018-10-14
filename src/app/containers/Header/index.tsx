@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { HeaderBar } from "app/components";
-import { connect } from "react-redux";
-import { RootState } from "app/reducers";
+import { HeaderBar } from 'app/components';
+import { connect } from 'react-redux';
+import { RootState } from 'app/reducers';
 import { updateIntl } from 'react-intl-redux';
-import {bindActionCreators, Dispatch} from "redux";
+import { bindActionCreators, Dispatch } from 'redux';
 
 export namespace Header {
   export interface Props {
@@ -18,7 +18,7 @@ export namespace Header {
     return {
       currentLocale: state.intl.locale,
       locales: state.locales
-    }
+    };
   },
   (dispatch: Dispatch): Pick<Header.Props, 'updateIntl'> => ({
     updateIntl: bindActionCreators(updateIntl, dispatch)
@@ -29,7 +29,7 @@ export class Header extends React.Component<Header.Props> {
     const headerProps = this.props as HeaderBar.Props;
     return (
       <header>
-        <HeaderBar {...headerProps}/>
+        <HeaderBar {...headerProps} />
       </header>
     );
   }

@@ -4,4 +4,4 @@ import * as todos from './todos';
 export default {
   locales,
   todos
-}
+};

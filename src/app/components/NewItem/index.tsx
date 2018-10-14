@@ -59,13 +59,12 @@ export class NewItem extends React.Component<NewItem.Props, NewItem.State> {
             type="text"
             className="form-control new-item-input"
             value={this.state.todo}
-            placeholder={messages["newItem"]}
+            placeholder={messages['newItem']}
             onFocus={this.handleOnFocus}
             onBlur={this.handleOnBlur}
             onChange={this.handleTodoChange}
             onKeyPress={this.handleKeyPress}
-            autoFocus
-          />
+            autoFocus />
         </div>
       </div>
     );
