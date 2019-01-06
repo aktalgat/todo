@@ -46,7 +46,7 @@
     "webpack": "^4.16.5",
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.7"
+    "webpack-dev-server": ">=3.1.11"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
